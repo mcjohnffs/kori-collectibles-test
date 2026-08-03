@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="{{ settings.color_bg }}">
 
-    {%- if settings.favicon != blank -%}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-    {%- endif -%}
+    <link rel="icon" type="image/png" href="{{ 'kori-favicon.png' | asset_url }}">
+    <link rel="apple-touch-icon" href="{{ 'kori-favicon.png' | asset_url }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
