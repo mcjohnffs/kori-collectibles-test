@@ -1263,14 +1263,26 @@ ul {
 
   .menu-toggle {
     display: inline-flex;
+    justify-self: start;
   }
 
   .header__bar {
-    grid-template-columns: 44px 1fr auto;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.5rem;
   }
 
   .header__logo {
-    justify-content: center;
+    justify-self: center;
+  }
+
+  .header__logo img,
+  .header__logo-img {
+    height: 40px;
+    max-width: min(140px, 42vw);
+  }
+
+  .header__actions {
+    justify-self: end;
   }
 }
 
