@@ -293,8 +293,8 @@ ul {
 .header__logo-img {
   display: block;
   width: auto;
-  height: 48px;
-  max-width: min(var(--logo-width, 168px), 48vw);
+  height: 56px;
+  max-width: min(var(--logo-width, 200px), 52vw);
   object-fit: contain;
 }
 
