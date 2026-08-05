@@ -39,7 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(1200px 500px at 10% -10%, rgba(45, 212, 191, 0.08), transparent 55%),
+    radial-gradient(1200px 500px at 10% -10%, rgba(37, 130, 101, 0.08), transparent 55%),
     radial-gradient(900px 420px at 100% 0%, rgba(245, 165, 36, 0.06), transparent 50%),
     var(--bg);
   color: var(--text);
@@ -510,8 +510,8 @@ ul {
   height: var(--loyalty-launcher-size);
   border: 0;
   border-radius: 999px;
-  background: linear-gradient(145deg, var(--accent), #1fa892);
-  color: #0c0e14;
+  background: linear-gradient(145deg, var(--accent), #1a5d48);
+  color: #f2f0eb;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   pointer-events: auto;
@@ -520,7 +520,7 @@ ul {
 
 .loyalty-launcher:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 34px rgba(45, 212, 191, 0.28);
+  box-shadow: 0 14px 34px rgba(37, 130, 101, 0.28);
 }
 
 .loyalty-widget.is-open .loyalty-launcher {
@@ -616,7 +616,7 @@ ul {
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) + 2px);
   background:
-    linear-gradient(165deg, rgba(45, 212, 191, 0.12), transparent 42%),
+    linear-gradient(165deg, rgba(37, 130, 101, 0.12), transparent 42%),
     var(--surface);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
   overflow: hidden;
@@ -731,7 +731,7 @@ ul {
 
 .loyalty-reward--ready {
   border-style: solid;
-  border-color: rgba(45, 212, 191, 0.45);
+  border-color: rgba(37, 130, 101, 0.45);
 }
 
 .rewards__redeem-panel {
@@ -778,10 +778,10 @@ ul {
 
 .rewards__code-card {
   padding: 1.1rem;
-  border: 1px solid rgba(45, 212, 191, 0.45);
+  border: 1px solid rgba(37, 130, 101, 0.45);
   border-radius: var(--radius);
   background:
-    linear-gradient(165deg, rgba(45, 212, 191, 0.08), transparent 42%),
+    linear-gradient(165deg, rgba(37, 130, 101, 0.08), transparent 42%),
     var(--surface);
 }
 
@@ -867,7 +867,7 @@ ul {
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) + 2px);
   background:
-    linear-gradient(165deg, rgba(45, 212, 191, 0.1), transparent 42%),
+    linear-gradient(165deg, rgba(37, 130, 101, 0.1), transparent 42%),
     var(--surface);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
   overflow: hidden;
@@ -927,7 +927,7 @@ ul {
 
 .loyalty-redeem--ready {
   border-style: solid;
-  border-color: rgba(45, 212, 191, 0.45);
+  border-color: rgba(37, 130, 101, 0.45);
 }
 
 .loyalty-redeem--compact {
@@ -1122,7 +1122,7 @@ ul {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background:
-    linear-gradient(145deg, rgba(45, 212, 191, 0.1), transparent 55%),
+    linear-gradient(145deg, rgba(37, 130, 101, 0.1), transparent 55%),
     var(--surface);
 }
 
@@ -1510,7 +1510,7 @@ html.in-app-browser .search-modal {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background:
-    linear-gradient(145deg, rgba(45, 212, 191, 0.12), transparent 55%),
+    linear-gradient(145deg, rgba(37, 130, 101, 0.12), transparent 55%),
     var(--surface);
   color: inherit;
   text-align: left;
@@ -2203,7 +2203,7 @@ html.in-app-browser .search-modal {
   background: linear-gradient(
     115deg,
     transparent 30%,
-    rgba(45, 212, 191, 0.3) 42%,
+    rgba(37, 130, 101, 0.3) 42%,
     rgba(124, 92, 255, 0.25) 50%,
     rgba(245, 165, 36, 0.3) 58%,
     transparent 70%
@@ -2307,7 +2307,7 @@ html.in-app-browser .search-modal {
   gap: 0.65rem;
   padding: 1.1rem 0.95rem 0.95rem;
   background:
-    linear-gradient(160deg, rgba(45, 212, 191, 0.08), transparent 45%),
+    linear-gradient(160deg, rgba(37, 130, 101, 0.08), transparent 45%),
     var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -2318,10 +2318,10 @@ html.in-app-browser .search-modal {
 }
 
 .game-tile:hover {
-  border-color: rgba(45, 212, 191, 0.45);
+  border-color: rgba(37, 130, 101, 0.45);
   transform: translateY(-2px);
   background:
-    linear-gradient(160deg, rgba(45, 212, 191, 0.14), transparent 50%),
+    linear-gradient(160deg, rgba(37, 130, 101, 0.14), transparent 50%),
     var(--surface);
 }
 
@@ -2422,10 +2422,10 @@ html.in-app-browser .search-modal {
 }
 
 .game-tile--toggle:hover {
-  border-color: rgba(45, 212, 191, 0.45);
+  border-color: rgba(37, 130, 101, 0.45);
   transform: translateY(-2px);
   background:
-    linear-gradient(160deg, rgba(45, 212, 191, 0.14), transparent 50%),
+    linear-gradient(160deg, rgba(37, 130, 101, 0.14), transparent 50%),
     var(--surface);
 }
 
@@ -2585,7 +2585,7 @@ html.in-app-browser .search-modal {
   display: block;
   aspect-ratio: 5 / 7;
   background:
-    radial-gradient(circle at 50% 20%, rgba(45, 212, 191, 0.06), transparent 55%),
+    radial-gradient(circle at 50% 20%, rgba(37, 130, 101, 0.06), transparent 55%),
     var(--surface-2);
   overflow: hidden;
 }
@@ -2689,13 +2689,13 @@ html.in-app-browser .search-modal {
 }
 
 .card__pill:hover:not(:disabled) {
-  border-color: rgba(45, 212, 191, 0.35);
+  border-color: rgba(37, 130, 101, 0.35);
   color: var(--text);
 }
 
 .card__pill.is-selected {
-  border-color: rgba(45, 212, 191, 0.55);
-  background: rgba(45, 212, 191, 0.12);
+  border-color: rgba(37, 130, 101, 0.55);
+  background: rgba(37, 130, 101, 0.12);
   color: var(--text);
 }
 
@@ -2920,8 +2920,8 @@ html.in-app-browser .search-modal {
   gap: 0.35rem;
   padding: 0.28rem 0.55rem;
   border-radius: 999px;
-  border: 1px solid rgba(45, 212, 191, 0.35);
-  background: rgba(45, 212, 191, 0.1);
+  border: 1px solid rgba(37, 130, 101, 0.35);
+  background: rgba(37, 130, 101, 0.1);
   color: var(--text);
   font-size: 0.75rem;
   font-weight: 550;
@@ -2965,7 +2965,7 @@ html.in-app-browser .search-modal {
   padding: 0 0.35rem;
   border-radius: 999px;
   background: var(--accent);
-  color: #06221e;
+  color: #f2f0eb;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 650;
@@ -3012,9 +3012,9 @@ html.in-app-browser .search-modal {
 
 .facet-tag:hover,
 .facet-tag.is-active {
-  border-color: rgba(45, 212, 191, 0.45);
+  border-color: rgba(37, 130, 101, 0.45);
   color: var(--text);
-  background: rgba(45, 212, 191, 0.1);
+  background: rgba(37, 130, 101, 0.1);
 }
 
 .facets__hint {
@@ -3127,8 +3127,8 @@ html.in-app-browser .search-modal {
   }
 
   .facets-mobile-btn[aria-expanded='true'] {
-    border-color: rgba(45, 212, 191, 0.45);
-    background: rgba(45, 212, 191, 0.1);
+    border-color: rgba(37, 130, 101, 0.45);
+    background: rgba(37, 130, 101, 0.1);
   }
 }
 
@@ -3268,19 +3268,19 @@ html.in-app-browser .search-modal {
 }
 
 .product-form__pill:hover .product-form__pill-text {
-  border-color: rgba(45, 212, 191, 0.35);
+  border-color: rgba(37, 130, 101, 0.35);
   color: var(--text);
 }
 
 .product-form__pill-input:focus-visible + .product-form__pill-text {
-  outline: 2px solid rgba(45, 212, 191, 0.55);
+  outline: 2px solid rgba(37, 130, 101, 0.55);
   outline-offset: 2px;
 }
 
 .product-form__pill-input:checked + .product-form__pill-text,
 .product-form__pill.is-selected .product-form__pill-text {
-  border-color: rgba(45, 212, 191, 0.55);
-  background: rgba(45, 212, 191, 0.12);
+  border-color: rgba(37, 130, 101, 0.55);
+  background: rgba(37, 130, 101, 0.12);
   color: var(--text);
 }
 
@@ -3544,8 +3544,8 @@ html.in-app-browser .search-modal {
 
 .footer__social-link:hover {
   color: var(--text);
-  border-color: rgba(45, 212, 191, 0.4);
-  background: rgba(45, 212, 191, 0.08);
+  border-color: rgba(37, 130, 101, 0.4);
+  background: rgba(37, 130, 101, 0.08);
   transform: translateY(-1px);
 }
 
@@ -3787,7 +3787,7 @@ html.in-app-browser .search-modal {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background:
-    linear-gradient(165deg, rgba(45, 212, 191, 0.08), transparent 42%),
+    linear-gradient(165deg, rgba(37, 130, 101, 0.08), transparent 42%),
     var(--surface);
   color: inherit;
   text-decoration: none;
@@ -3795,7 +3795,7 @@ html.in-app-browser .search-modal {
 }
 
 .contact__channel:hover {
-  border-color: rgba(45, 212, 191, 0.4);
+  border-color: rgba(37, 130, 101, 0.4);
   transform: translateY(-2px);
 }
 
@@ -3869,7 +3869,7 @@ html.in-app-browser .search-modal {
 }
 
 .contact-form__input:focus {
-  outline: 2px solid rgba(45, 212, 191, 0.45);
+  outline: 2px solid rgba(37, 130, 101, 0.45);
   outline-offset: 1px;
 }
 
@@ -3881,9 +3881,9 @@ html.in-app-browser .search-modal {
 .contact-form__success {
   margin: 0;
   padding: 0.85rem 1rem;
-  border: 1px solid rgba(45, 212, 191, 0.45);
+  border: 1px solid rgba(37, 130, 101, 0.45);
   border-radius: var(--radius-sm);
-  background: rgba(45, 212, 191, 0.1);
+  background: rgba(37, 130, 101, 0.1);
   color: var(--accent);
 }
 
@@ -3981,16 +3981,16 @@ html.in-app-browser .search-modal {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background:
-    linear-gradient(160deg, rgba(45, 212, 191, 0.08), transparent 45%),
+    linear-gradient(160deg, rgba(37, 130, 101, 0.08), transparent 45%),
     var(--surface);
   transition: border-color 0.15s, transform 0.15s, background 0.15s;
 }
 
 .tcg-landing__card:hover {
-  border-color: rgba(45, 212, 191, 0.45);
+  border-color: rgba(37, 130, 101, 0.45);
   transform: translateY(-2px);
   background:
-    linear-gradient(160deg, rgba(45, 212, 191, 0.14), transparent 50%),
+    linear-gradient(160deg, rgba(37, 130, 101, 0.14), transparent 50%),
     var(--surface);
 }
 
@@ -4032,7 +4032,7 @@ html.in-app-browser .search-modal {
 }
 
 .tcg-landing__set:hover {
-  border-color: rgba(45, 212, 191, 0.45);
+  border-color: rgba(37, 130, 101, 0.45);
   transform: translateY(-2px);
 }
 
@@ -4057,7 +4057,7 @@ html.in-app-browser .search-modal {
 .tcg-landing__set-media--banner {
   padding: 1.1rem 1.25rem;
   background:
-    linear-gradient(160deg, rgba(45, 212, 191, 0.1), transparent 55%),
+    linear-gradient(160deg, rgba(37, 130, 101, 0.1), transparent 55%),
     var(--surface-2);
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" role="img" aria-label="More TCGs">
   <rect x="6" y="14" width="22" height="30" rx="3" fill="none" stroke="#F5A524" stroke-width="3"/>
-  <rect x="14" y="22" width="22" height="30" rx="3" fill="none" stroke="#2DD4BF" stroke-width="3"/>
+  <rect x="14" y="22" width="22" height="30" rx="3" fill="none" stroke="#258265" stroke-width="3"/>
   <rect x="22" y="30" width="22" height="30" rx="3" fill="none" stroke="#F2F0EB" stroke-width="3"/>
   <text
     x="56"
