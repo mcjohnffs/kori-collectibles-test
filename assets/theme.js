@@ -1662,7 +1662,7 @@ const styles = `
   }
   .zoom-toggle-icon {
     position: absolute;
-    bottom: 10px;
+    top: 10px;
     right: 10px;
     width: 36px;
     height: 36px;
