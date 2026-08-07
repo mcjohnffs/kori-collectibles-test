@@ -634,7 +634,9 @@
     {%- endif -%}
 
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
-   
+    {% if template contains 'product' %}
+      <script type="text/javascript" src="{{ 'jquery.zoom.min.js' | asset_url }}" defer=”defer”>
+    {% endif %}
 
   </body>
 </html>
