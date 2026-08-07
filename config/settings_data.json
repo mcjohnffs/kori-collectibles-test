@@ -68,27 +68,27 @@
     },
     "content_for_index": [],
     "blocks": {
+      "16278478101612877664": {
+        "type": "shopify://apps/pagefly-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200",
+        "disabled": false,
+        "settings": {}
+      },
       "8350846261180586927": {
         "type": "shopify://apps/image-zoom/blocks/app-embed/019a4977-037e-7f5c-9744-b1948ba73ead",
         "disabled": false,
         "settings": {
           "enable_on_product_images": true,
           "custom_class": "",
-          "zoom_level": 3,
+          "zoom_level": 2,
           "lens_size": 150,
-          "lens_shape": "circle",
+          "lens_shape": "square",
           "lens_border_color": "#000000",
           "lens_border_width": 2,
           "smooth_move": true,
-          "disable_on_mobile": true,
+          "disable_on_mobile": false,
           "mobile_max_width": 768,
-          "show_on_touch": false
+          "show_on_touch": true
         }
-      },
-      "16278478101612877664": {
-        "type": "shopify://apps/pagefly-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200",
-        "disabled": false,
-        "settings": {}
       }
     }
   }
