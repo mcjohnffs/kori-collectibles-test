@@ -4177,12 +4177,12 @@ html.in-app-browser .search-modal {
   }
 }
 
-const styles = `
-  .image-zoom-container {
+
+.image-zoom-container {
     position: relative;
     overflow: hidden;
   }
-  .zoom-toggle-icon {
+.zoom-toggle-icon {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -4201,14 +4201,13 @@ const styles = `
     font-size: 18px;
     transition: background 0.2s;
   }
-  .zoom-toggle-icon:hover {
+.zoom-toggle-icon:hover {
     background: rgba(255,255,255,1);
   }
-  .zoom-toggle-icon.zoomed {
+.zoom-toggle-icon.zoomed {
     background: rgba(0,0,0,0.6);
     color: white;
   }
-  .image-zoom-container img.zoomed-image {
+.image-zoom-container img.zoomed-image {
     transition: transform 0.2s ease;
   }
-`;
