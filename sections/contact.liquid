@@ -18,13 +18,7 @@
       {%- endif -%}
     </div>
 
-    <div class="contact__channels">
-      <a class="contact__channel" href="mailto:{{ contact_email | escape }}">
-        <span class="contact__channel-label">Email</span>
-        <span class="contact__channel-value">{{ contact_email | escape }}</span>
-        <span class="contact__channel-hint">Best for orders, returns, and account help</span>
-      </a>
-    </div>
+    
 
     {%- if section.settings.show_form -%}
       <div class="contact__form-wrap">
