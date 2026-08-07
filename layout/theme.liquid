@@ -58,7 +58,7 @@
         --page-width-setting: {{ settings.page_width | default: 1360 }}px;
         --logo-width: {{ settings.logo_width | default: 168 }}px;
       }
-
+    
       /* Critical paint — visible even if theme.css is slow or blocked */
       body {
         margin: 0;
@@ -633,5 +633,15 @@
     {%- endif -%}
 
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      mediumZoom('.product__frame img', {
+      margin: 24,
+      background: 'rgba(0, 0, 0, 0.85)'
+      });
+    });
+</script>
+
   </body>
 </html>
