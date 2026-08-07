@@ -1655,7 +1655,7 @@
 })();
 
 
-document.querySelectorAll('.card__media img').forEach(img => {
+document.querySelectorAll('.card__media img, .product-card img').forEach(img => {
   const container = img.parentElement;
   container.style.overflow = 'hidden';
   container.style.cursor = 'zoom-in';
