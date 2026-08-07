@@ -45,6 +45,27 @@
     "loyalty_redeem_proxy_url": "/apps/kori-loyalty/redeem",
     "empty_cart_message": "Your cart is empty - the binder awaits.",
     "cart_free_shipping_threshold": "40",
+    "sections": {
+      "returns": {
+        "type": "returns",
+        "settings": {
+          "eyebrow": "Returns",
+          "heading": "Refund policy",
+          "intro": "We condition-check before packing. If something arrives wrong or damaged, we’ll put it right.",
+          "window": "14 days",
+          "damaged_highlight": "We’ll replace or refund",
+          "support_email": "info.isaku@gmail.com",
+          "eligibility_heading": "What you can return",
+          "eligibility_body": "<p>Contact us within 14 days of delivery if:</p><ul><li>The item arrived damaged in transit</li><li>You received the wrong item</li><li>A single’s condition doesn’t match the listing</li></ul><p>Include your order number and clear photos of the item and packaging where relevant.</p>",
+          "exclusions_heading": "What we can’t accept",
+          "exclusions_body": "<ul><li>Sealed product that has been opened or has broken factory seals</li><li>Change-of-mind returns on singles once dispatched (condition is listed clearly before purchase)</li><li>Items returned without prior approval</li><li>Items damaged after delivery through mishandling</li></ul><p>If you’re unsure before ordering, email us and we’ll help.</p>",
+          "process_heading": "How to start a return",
+          "process_body": "<p>Email <a href=\"mailto:support@koricollectibles.co.uk\">info.isaku@gmail.com</a> with your order number and photos.</p><p>We’ll confirm whether a replacement, refund, or return is needed. Don’t post anything back until we reply.</p><p>Approved returns should be packed securely so cards and sealed product stay protected in transit.</p>",
+          "refunds_heading": "Refunds",
+          "refunds_body": "<p>Once we receive and check an approved return — or once we confirm a damaged/wrong item case — we’ll refund to your original payment method.</p><p>Refunds usually show within a few working days, depending on your bank or card provider.</p><p>Original shipping is only refunded when the return is due to our error or transit damage we accept responsibility for.</p>"
+        }
+      }
+    },
     "content_for_index": []
   }
 }
