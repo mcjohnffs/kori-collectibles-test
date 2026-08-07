@@ -809,10 +809,12 @@
       const template = seed.cloneNode(true);
       track.replaceChildren(template);
 
-      while (track.scrollWidth < window.innerWidth) {
+      let guard = 0;
+      while (track.scrollWidth < window.innerWidth && guard < 50) {
         const clone = template.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
         track.appendChild(clone);
+        guard++;
       }
 
       const loopWidth = track.scrollWidth;
