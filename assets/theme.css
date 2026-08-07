@@ -4172,3 +4172,9 @@ html.in-app-browser .search-modal {
     transform: none;
   }
 }
+
+
+<div class=”image-container”>
+  <img class=”image-zoom” src=”{{ featured_image | img_url: '480x480' }}” alt="{{ image.alt | escape }} data-zoom="{{ featured_image | img_url: '1024x1024', scale: 2 }}>
+  <div class="image-details"></div>
+</div>
