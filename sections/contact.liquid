@@ -2,7 +2,7 @@
   assign contact_email = section.settings.email | default: 'support@koricollectibles.co.uk' | strip
   assign discord_url = section.settings.discord_url | default: settings.social_discord | strip
   if discord_url == blank
-    assign discord_url = 'https://discord.gg/8CJVeuAdEv'
+    assign discord_url = '*'
   endif
 -%}
 
