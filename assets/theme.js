@@ -1697,7 +1697,7 @@ document.head.appendChild(styleSheet);
 
 // Main logic
 function initImageZoom() {
-  document.querySelectorAll('.card__media img, .product__media img').forEach(img => {
+  document.querySelectorAll('.product__media img').forEach(img => {
     const container = img.parentElement;
 
     // Add class for styling
