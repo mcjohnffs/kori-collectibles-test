@@ -16,9 +16,7 @@
       rel="stylesheet"
     >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" defer=”defer”></script>
-    {% if template contains 'product' %}
-      <script type="text/javascript" src="{{ 'jquery.zoom.min.js' | asset_url }}" defer=”defer”>
-    {% endif %}
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
