@@ -17,7 +17,9 @@
     >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" defer=”defer”></script>
 
-    
+    {% if template contains 'product' %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" defer></script>
+    {% endif %}
     
     <title>
       {{ page_title }}
@@ -26,9 +28,7 @@
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {% if template contains 'product' %}
-      <script type="text/javascript" src="{{ 'jquery.zoom.min.js' | asset_url }}" defer=”defer”>
-    {% endif %}
+    
 
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
