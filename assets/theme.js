@@ -1694,83 +1694,11 @@ const styles = `
   }
 `;
 
-// Styles
-const styles = `
-  .image-zoom-container {
-    position: relative;
-    overflow: hidden;
-  }
-  .zoom-toggle-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    background: rgba(255,255,255,0.85);
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    font-size: 18px;
-    transition: background 0.2s;
-    touch-action: manipulation;
-  }
-  .zoom-toggle-icon:hover {
-    background: rgba(255,255,255,1);
-  }
-  .zoom-toggle-icon.zoomed {
-    background: rgba(0,0,0,0.7);
-    color: white;
-  }
-`;
-
-// Styles
-const styles = `
-  .image-zoom-container {
-    position: relative;
-    overflow: hidden;
-  }
-  .zoom-toggle-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    background: rgba(255,255,255,0.85);
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    font-size: 18px;
-    transition: background 0.2s;
-    touch-action: manipulation;
-  }
-  .zoom-toggle-icon:hover {
-    background: rgba(255,255,255,1);
-  }
-  .zoom-toggle-icon.zoomed {
-    background: rgba(0,0,0,0.7);
-    color: white;
-  }
-`;
-
 const styleSheet = document.createElement("style");
 styleSheet.textContent = styles;
 document.head.appendChild(styleSheet);
 
 function initImageZoom() {
-  const DRAG_SENSITIVITY = 0.6; // <-- Tune this value (0.4–0.8 usually feels good)
-
   document.querySelectorAll('.card__media img, .product__media img').forEach(img => {
     const container = img.parentElement;
     container.classList.add('image-zoom-container');
@@ -1782,6 +1710,8 @@ function initImageZoom() {
     container.appendChild(btn);
 
     let zoomed = false;
+
+    // Pan state
     let totalTranslateX = 0;
     let totalTranslateY = 0;
     let startPointerX = 0;
@@ -1791,13 +1721,14 @@ function initImageZoom() {
 
     const handlePointerDown = (e) => {
       if (!zoomed) return;
-      if (e.pointerType === 'mouse' && e.buttons !== 1) return;
+      // Only react to the primary pointer (finger/stylus/mouse)
+      if (e.pointerType === 'mouse' && e.buttons !== 1) return; // left button only
       e.preventDefault();
       startPointerX = e.clientX;
       startPointerY = e.clientY;
       baseTranslateX = totalTranslateX;
       baseTranslateY = totalTranslateY;
-      container.setPointerCapture(e.pointerId);
+      container.setPointerCapture(e.pointerId); // track moves even outside container
     };
 
     const handlePointerMove = (e) => {
@@ -1805,30 +1736,33 @@ function initImageZoom() {
       e.preventDefault();
       const deltaX = e.clientX - startPointerX;
       const deltaY = e.clientY - startPointerY;
-      // Slower movement
-      totalTranslateX = baseTranslateX + deltaX * DRAG_SENSITIVITY;
-      totalTranslateY = baseTranslateY + deltaY * DRAG_SENSITIVITY;
+      totalTranslateX = baseTranslateX + deltaX;
+      totalTranslateY = baseTranslateY + deltaY;
+
       img.style.transform = `scale(2) translate(${totalTranslateX}px, ${totalTranslateY}px)`;
     };
 
     const handlePointerUp = (e) => {
       if (!zoomed) return;
+      // Finalise translation
       const deltaX = e.clientX - startPointerX;
       const deltaY = e.clientY - startPointerY;
-      totalTranslateX = baseTranslateX + deltaX * DRAG_SENSITIVITY;
-      totalTranslateY = baseTranslateY + deltaY * DRAG_SENSITIVITY;
+      totalTranslateX = baseTranslateX + deltaX;
+      totalTranslateY = baseTranslateY + deltaY;
       container.releasePointerCapture(e.pointerId);
     };
 
     const toggleZoom = (e) => {
       e.stopPropagation();
       if (!zoomed) {
+        // ZOOM IN
         const rect = container.getBoundingClientRect();
         const clientX = e.clientX || rect.left + rect.width/2;
         const clientY = e.clientY || rect.top + rect.height/2;
         const x = ((clientX - rect.left) / rect.width) * 100;
         const y = ((clientY - rect.top) / rect.height) * 100;
 
+        // Set the zoom centre and reset any translation
         img.style.transformOrigin = `${x}% ${y}%`;
         totalTranslateX = 0;
         totalTranslateY = 0;
@@ -1837,32 +1771,38 @@ function initImageZoom() {
         btn.innerHTML = '✕';
         btn.classList.add('zoomed');
         container.style.cursor = 'zoom-out';
-        container.style.touchAction = 'none';
+        container.style.touchAction = 'none';   // allow dragging
 
+        // Add drag listeners
         container.addEventListener('pointerdown', handlePointerDown);
         container.addEventListener('pointermove', handlePointerMove);
         container.addEventListener('pointerup', handlePointerUp);
         container.addEventListener('pointercancel', handlePointerUp);
+
         zoomed = true;
       } else {
+        // ZOOM OUT
         img.style.transform = 'scale(1) translate(0px, 0px)';
         img.style.transformOrigin = 'center';
 
         btn.innerHTML = '🔍';
         btn.classList.remove('zoomed');
         container.style.cursor = 'zoom-in';
-        container.style.touchAction = '';
+        container.style.touchAction = '';       // restore normal scroll
 
+        // Remove drag listeners
         container.removeEventListener('pointerdown', handlePointerDown);
         container.removeEventListener('pointermove', handlePointerMove);
         container.removeEventListener('pointerup', handlePointerUp);
         container.removeEventListener('pointercancel', handlePointerUp);
+
         zoomed = false;
       }
     };
 
     btn.addEventListener('click', toggleZoom);
 
+    // (Optional) Click outside the button to close zoom
     container.addEventListener('click', (e) => {
       if (zoomed && e.target !== btn && !btn.contains(e.target)) {
         toggleZoom(e);
@@ -1871,6 +1811,7 @@ function initImageZoom() {
   });
 }
 
+// Run on load
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initImageZoom);
 } else {
