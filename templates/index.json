@@ -15,8 +15,8 @@
         "s1": {
           "type": "stat",
           "settings": {
-            "label": "Free UK delivery",
-            "text": "Over £40"
+            "label": "Free Swiss delivery",
+            "text": "Over CHF 10"
           }
         },
         "s2": {
@@ -45,12 +45,12 @@
         "heading_line_2": "Honest",
         "heading_em": "condition",
         "heading_after": ".",
-        "text": "Singles and sealed from the UK — inspected under lamp, priced for collectors, with live inventory counts.",
+        "text": "Singles and sealed from Switzerland — inspected, priced for collectors, with live inventory counts.",
         "primary_label": "Shop singles",
         "primary_link": "/collections/kori-pokemon-singles",
-        "secondary_label": "Browse sealed",
+        "secondary_label": "",
         "secondary_link": "/collections/kori-pokemon-sealed",
-        "source_collection": "",
+        "source_collection": "151",
         "min_price": 5,
         "pool_size": 50
       }
@@ -63,11 +63,10 @@
           "settings": {
             "coming_soon": false,
             "coming_soon_text": "Coming soon",
-            "title": "Pokemon",
-            "show_title": false,
+            "title": "English Pokemon",
+            "show_title": true,
             "meta": "Singles · Sealed",
             "link": "shopify://pages/pokemon",
-            "logo": "shopify://shop_images/Pokemon_Trading_Card_Game_logo_svg.webp",
             "logo_key": "pokemon"
           }
         },
@@ -80,7 +79,6 @@
             "show_title": true,
             "meta": "Singles · Sealed",
             "link": "shopify://pages/pokemon-japanese",
-            "logo": "shopify://shop_images/Pokemon_Trading_Card_Game_logo_svg.webp",
             "logo_key": "pokemon"
           }
         },
