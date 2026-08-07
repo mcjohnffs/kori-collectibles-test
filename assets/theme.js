@@ -1655,6 +1655,7 @@
 })();
 
 
+// Add styles
 const styles = `
   .image-zoom-container {
     position: relative;
@@ -1664,9 +1665,9 @@ const styles = `
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 36px;
-    height: 36px;
-    background: rgba(255,255,255,0.8);
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.85);
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -1678,12 +1679,14 @@ const styles = `
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     font-size: 18px;
     transition: background 0.2s;
+    /* enlarge touch target */
+    touch-action: manipulation;
   }
   .zoom-toggle-icon:hover {
     background: rgba(255,255,255,1);
   }
   .zoom-toggle-icon.zoomed {
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.7);
     color: white;
   }
   .image-zoom-container img.zoomed-image {
@@ -1695,40 +1698,33 @@ const styleSheet = document.createElement("style");
 styleSheet.textContent = styles;
 document.head.appendChild(styleSheet);
 
-// Main logic
 function initImageZoom() {
-  document.querySelectorAll('.product__media img').forEach(img => {
+  document.querySelectorAll('.card__media img, .product__media img').forEach(img => {
     const container = img.parentElement;
-
-    // Add class for styling
     container.classList.add('image-zoom-container');
 
-    // Create toggle button with a magnifying glass icon (SVG)
     const btn = document.createElement('button');
     btn.classList.add('zoom-toggle-icon');
-    btn.innerHTML = `🔍`; // or use an SVG for better control
+    btn.innerHTML = '🔍';
     btn.setAttribute('aria-label', 'Zoom image');
     container.appendChild(btn);
 
     let zoomed = false;
 
-    // Pan handler (only attached when zoomed)
     const handlePan = (e) => {
       if (!zoomed) return;
-      e.preventDefault();
+      e.preventDefault(); // stops text selection / drag
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       img.style.transformOrigin = `${x}% ${y}%`;
     };
 
-    // Toggle zoom
     const toggleZoom = (e) => {
-      e.stopPropagation();
+      e.stopPropagation(); // don't trigger container’s own click handler
       if (!zoomed) {
-        // Zoom in
+        // Zoom in at tap point (or center)
         const rect = container.getBoundingClientRect();
-        // Use click coordinates if available (from button tap), else center
         const clientX = e.clientX || rect.left + rect.width/2;
         const clientY = e.clientY || rect.top + rect.height/2;
         const x = ((clientX - rect.left) / rect.width) * 100;
@@ -1737,13 +1733,12 @@ function initImageZoom() {
         img.style.transformOrigin = `${x}% ${y}%`;
         img.style.transform = 'scale(2)';
         img.classList.add('zoomed-image');
-        btn.innerHTML = '✕'; // change to close icon
+        btn.innerHTML = '✕';
         btn.classList.add('zoomed');
         container.style.cursor = 'zoom-out';
+        container.style.touchAction = 'none';   // allow drag to pan
 
-        // Attach panning listener
         container.addEventListener('pointermove', handlePan, { passive: false });
-        // Prevent click-outside-zoom from triggering zoom out until explicit action
         zoomed = true;
       } else {
         // Zoom out
@@ -1753,20 +1748,20 @@ function initImageZoom() {
         btn.innerHTML = '🔍';
         btn.classList.remove('zoomed');
         container.style.cursor = 'zoom-in';
+        container.style.touchAction = '';        // restore normal scroll
 
-        // Remove pan listener
         container.removeEventListener('pointermove', handlePan);
         zoomed = false;
       }
     };
 
+    // 1. Button click – no touchend listener, just clean click
     btn.addEventListener('click', toggleZoom);
-    btn.addEventListener('touchend', (e) => e.preventDefault()); // avoid double-firing on mobile
 
-    // Optional: allow closing by clicking outside (on the container itself, not the button)
+    // 2. (Optional) Click outside button closes zoom
     container.addEventListener('click', (e) => {
       if (zoomed && e.target !== btn && !btn.contains(e.target)) {
-        toggleZoom(e);
+        toggleZoom(e); // will zoom out because zoomed is true
       }
     });
   });
