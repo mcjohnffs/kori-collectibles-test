@@ -45,6 +45,11 @@
   endif
 -%}
 
+<div class=”image-container”>
+  <img class=”image-zoom” src=”{{ featured_image | img_url: '480x480' }}” alt="{{ image.alt | escape }} data-zoom="{{ featured_image | img_url: '1024x1024', scale: 2 }}>
+  <div class="image-details"></div>
+</div>
+
 <section class="page-width">
   <div class="product{% if sealed %} product--sealed{% endif %}">
     <div class="product__media">
