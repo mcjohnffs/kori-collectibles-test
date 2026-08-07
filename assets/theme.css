@@ -3157,7 +3157,7 @@ html.in-app-browser .search-modal {
 .product__frame img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .product--sealed .product__frame img {
