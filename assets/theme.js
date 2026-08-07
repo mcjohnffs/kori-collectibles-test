@@ -1655,7 +1655,7 @@
 })();
 
 
-// Add styles
+// Styles
 const styles = `
   .image-zoom-container {
     position: relative;
@@ -1679,7 +1679,6 @@ const styles = `
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     font-size: 18px;
     transition: background 0.2s;
-    /* enlarge touch target */
     touch-action: manipulation;
   }
   .zoom-toggle-icon:hover {
@@ -1689,8 +1688,9 @@ const styles = `
     background: rgba(0,0,0,0.7);
     color: white;
   }
-  .image-zoom-container img.zoomed-image {
-    transition: transform 0.2s ease;
+  .image-zoom-container img {
+    /* Smooth zoom & pan transitions can be added if desired */
+    /* transition: transform 0.2s ease; */ 
   }
 `;
 
@@ -1711,57 +1711,101 @@ function initImageZoom() {
 
     let zoomed = false;
 
-    const handlePan = (e) => {
+    // Pan state
+    let totalTranslateX = 0;
+    let totalTranslateY = 0;
+    let startPointerX = 0;
+    let startPointerY = 0;
+    let baseTranslateX = 0;
+    let baseTranslateY = 0;
+
+    const handlePointerDown = (e) => {
       if (!zoomed) return;
-      e.preventDefault(); // stops text selection / drag
-      const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      img.style.transformOrigin = `${x}% ${y}%`;
+      // Only react to the primary pointer (finger/stylus/mouse)
+      if (e.pointerType === 'mouse' && e.buttons !== 1) return; // left button only
+      e.preventDefault();
+      startPointerX = e.clientX;
+      startPointerY = e.clientY;
+      baseTranslateX = totalTranslateX;
+      baseTranslateY = totalTranslateY;
+      container.setPointerCapture(e.pointerId); // track moves even outside container
+    };
+
+    const handlePointerMove = (e) => {
+      if (!zoomed) return;
+      e.preventDefault();
+      const deltaX = e.clientX - startPointerX;
+      const deltaY = e.clientY - startPointerY;
+      totalTranslateX = baseTranslateX + deltaX;
+      totalTranslateY = baseTranslateY + deltaY;
+
+      img.style.transform = `scale(2) translate(${totalTranslateX}px, ${totalTranslateY}px)`;
+    };
+
+    const handlePointerUp = (e) => {
+      if (!zoomed) return;
+      // Finalise translation
+      const deltaX = e.clientX - startPointerX;
+      const deltaY = e.clientY - startPointerY;
+      totalTranslateX = baseTranslateX + deltaX;
+      totalTranslateY = baseTranslateY + deltaY;
+      container.releasePointerCapture(e.pointerId);
     };
 
     const toggleZoom = (e) => {
-      e.stopPropagation(); // don't trigger container’s own click handler
+      e.stopPropagation();
       if (!zoomed) {
-        // Zoom in at tap point (or center)
+        // ZOOM IN
         const rect = container.getBoundingClientRect();
         const clientX = e.clientX || rect.left + rect.width/2;
         const clientY = e.clientY || rect.top + rect.height/2;
         const x = ((clientX - rect.left) / rect.width) * 100;
         const y = ((clientY - rect.top) / rect.height) * 100;
 
+        // Set the zoom centre and reset any translation
         img.style.transformOrigin = `${x}% ${y}%`;
-        img.style.transform = 'scale(2)';
-        img.classList.add('zoomed-image');
+        totalTranslateX = 0;
+        totalTranslateY = 0;
+        img.style.transform = 'scale(2) translate(0px, 0px)';
+
         btn.innerHTML = '✕';
         btn.classList.add('zoomed');
         container.style.cursor = 'zoom-out';
-        container.style.touchAction = 'none';   // allow drag to pan
+        container.style.touchAction = 'none';   // allow dragging
 
-        container.addEventListener('pointermove', handlePan, { passive: false });
+        // Add drag listeners
+        container.addEventListener('pointerdown', handlePointerDown);
+        container.addEventListener('pointermove', handlePointerMove);
+        container.addEventListener('pointerup', handlePointerUp);
+        container.addEventListener('pointercancel', handlePointerUp);
+
         zoomed = true;
       } else {
-        // Zoom out
-        img.style.transform = 'scale(1)';
+        // ZOOM OUT
+        img.style.transform = 'scale(1) translate(0px, 0px)';
         img.style.transformOrigin = 'center';
-        img.classList.remove('zoomed-image');
+
         btn.innerHTML = '🔍';
         btn.classList.remove('zoomed');
         container.style.cursor = 'zoom-in';
-        container.style.touchAction = '';        // restore normal scroll
+        container.style.touchAction = '';       // restore normal scroll
 
-        container.removeEventListener('pointermove', handlePan);
+        // Remove drag listeners
+        container.removeEventListener('pointerdown', handlePointerDown);
+        container.removeEventListener('pointermove', handlePointerMove);
+        container.removeEventListener('pointerup', handlePointerUp);
+        container.removeEventListener('pointercancel', handlePointerUp);
+
         zoomed = false;
       }
     };
 
-    // 1. Button click – no touchend listener, just clean click
     btn.addEventListener('click', toggleZoom);
 
-    // 2. (Optional) Click outside button closes zoom
+    // (Optional) Click outside the button to close zoom
     container.addEventListener('click', (e) => {
       if (zoomed && e.target !== btn && !btn.contains(e.target)) {
-        toggleZoom(e); // will zoom out because zoomed is true
+        toggleZoom(e);
       }
     });
   });
