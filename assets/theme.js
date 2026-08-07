@@ -1655,21 +1655,64 @@
 })();
 
 
+
+
 document.querySelectorAll('.card__media img, .product__media img').forEach(img => {
-  const container = img.parentElement;
+
+  const container = img.closest('.product__media-item');
+
+  if (!container) return;
+
   container.style.overflow = 'hidden';
   container.style.cursor = 'zoom-in';
 
+  img.style.transition = 'transform 0.2s ease';
+
+  let zoomed = false;
+
+  // Desktop zoom
   container.addEventListener('mousemove', (e) => {
+    if (window.innerWidth < 750) return;
+
     const rect = container.getBoundingClientRect();
+
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
-    img.style.transformOrigin = x + '% ' + y + '%';
+
+    img.style.transformOrigin = `${x}% ${y}%`;
     img.style.transform = 'scale(2)';
   });
 
   container.addEventListener('mouseleave', () => {
+    if (window.innerWidth < 750) return;
+
     img.style.transform = 'scale(1)';
     img.style.transformOrigin = 'center';
   });
+
+
+  // Mobile tap zoom
+  container.addEventListener('touchstart', (e) => {
+
+    if (window.innerWidth >= 750) return;
+
+    if (!zoomed) {
+      const touch = e.touches[0];
+      const rect = container.getBoundingClientRect();
+
+      const x = ((touch.clientX - rect.left) / rect.width) * 100;
+      const y = ((touch.clientY - rect.top) / rect.height) * 100;
+
+      img.style.transformOrigin = `${x}% ${y}%`;
+      img.style.transform = 'scale(2)';
+      zoomed = true;
+
+    } else {
+      img.style.transform = 'scale(1)';
+      img.style.transformOrigin = 'center';
+      zoomed = false;
+    }
+
+  }, { passive: true });
+
 });
