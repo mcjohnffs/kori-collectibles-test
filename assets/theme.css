@@ -3829,6 +3829,8 @@ html.in-app-browser .search-modal {
   max-width: 34rem;
   padding-top: 0.5rem;
   border-top: 1px solid var(--border);
+  text-align: center;
+  margin: 0 auto;
 }
 
 .contact__form-title {
