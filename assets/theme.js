@@ -1694,43 +1694,24 @@ const styles = `
   }
 `;
 
-// Styles
-const styles = `
-  .image-zoom-container {
-    position: relative;
-    overflow: hidden;
-    cursor: zoom-in;  /* shows magnifying glass when not zoomed */
-  }
-  .image-zoom-container.zoomed {
-    cursor: zoom-out;
-  }
-`;
-
-// Styles
-const styles = `
-  .image-zoom-container {
-    position: relative;
-    overflow: hidden;
-    cursor: zoom-in;
-  }
-  .image-zoom-container.zoomed {
-    cursor: zoom-out;
-  }
-`;
-
 const styleSheet = document.createElement("style");
 styleSheet.textContent = styles;
 document.head.appendChild(styleSheet);
 
 function initImageZoom() {
-  const DRAG_SENSITIVITY = 0.6; // adjustable
-  const TAP_THRESHOLD = 5;      // pixels of movement allowed before it’s a drag
-
   document.querySelectorAll('.card__media img, .product__media img').forEach(img => {
     const container = img.parentElement;
     container.classList.add('image-zoom-container');
 
+    const btn = document.createElement('button');
+    btn.classList.add('zoom-toggle-icon');
+    btn.innerHTML = '🔍';
+    btn.setAttribute('aria-label', 'Zoom image');
+    container.appendChild(btn);
+
     let zoomed = false;
+
+    // Pan state
     let totalTranslateX = 0;
     let totalTranslateY = 0;
     let startPointerX = 0;
@@ -1738,76 +1719,41 @@ function initImageZoom() {
     let baseTranslateX = 0;
     let baseTranslateY = 0;
 
-    // For tap detection (both zoomed and unzoomed states)
-    let tapStartX = 0;
-    let tapStartY = 0;
-    let tapMoved = false;
-
     const handlePointerDown = (e) => {
-      tapStartX = e.clientX;
-      tapStartY = e.clientY;
-      tapMoved = false;
-
       if (!zoomed) return;
-
-      // For panning: only start if zoomed
-      if (e.pointerType === 'mouse' && e.buttons !== 1) return;
+      // Only react to the primary pointer (finger/stylus/mouse)
+      if (e.pointerType === 'mouse' && e.buttons !== 1) return; // left button only
       e.preventDefault();
       startPointerX = e.clientX;
       startPointerY = e.clientY;
       baseTranslateX = totalTranslateX;
       baseTranslateY = totalTranslateY;
-      container.setPointerCapture(e.pointerId);
+      container.setPointerCapture(e.pointerId); // track moves even outside container
     };
 
     const handlePointerMove = (e) => {
-      // Detect if moved beyond threshold (for tap vs drag)
-      const dist = Math.hypot(e.clientX - tapStartX, e.clientY - tapStartY);
-      if (dist > TAP_THRESHOLD) {
-        tapMoved = true;
-      }
-
       if (!zoomed) return;
       e.preventDefault();
       const deltaX = e.clientX - startPointerX;
       const deltaY = e.clientY - startPointerY;
-      totalTranslateX = baseTranslateX + deltaX * DRAG_SENSITIVITY;
-      totalTranslateY = baseTranslateY + deltaY * DRAG_SENSITIVITY;
+      totalTranslateX = baseTranslateX + deltaX;
+      totalTranslateY = baseTranslateY + deltaY;
+
       img.style.transform = `scale(2) translate(${totalTranslateX}px, ${totalTranslateY}px)`;
     };
 
     const handlePointerUp = (e) => {
-      if (zoomed) {
-        // Finalise pan translation
-        const deltaX = e.clientX - startPointerX;
-        const deltaY = e.clientY - startPointerY;
-        totalTranslateX = baseTranslateX + deltaX * DRAG_SENSITIVITY;
-        totalTranslateY = baseTranslateY + deltaY * DRAG_SENSITIVITY;
-        container.releasePointerCapture(e.pointerId);
-      }
-
-      // Tap detection (works in both zoomed and unzoomed states)
-      if (!tapMoved) {
-        // It's a tap! Toggle zoom.
-        toggleZoom(e);
-      }
-      // Reset tap tracking
-      tapMoved = false;
-    };
-
-    const handlePointerCancel = (e) => {
-      if (zoomed) {
-        const deltaX = e.clientX - startPointerX;
-        const deltaY = e.clientY - startPointerY;
-        totalTranslateX = baseTranslateX + deltaX * DRAG_SENSITIVITY;
-        totalTranslateY = baseTranslateY + deltaY * DRAG_SENSITIVITY;
-        container.releasePointerCapture(e.pointerId);
-      }
-      tapMoved = false;
+      if (!zoomed) return;
+      // Finalise translation
+      const deltaX = e.clientX - startPointerX;
+      const deltaY = e.clientY - startPointerY;
+      totalTranslateX = baseTranslateX + deltaX;
+      totalTranslateY = baseTranslateY + deltaY;
+      container.releasePointerCapture(e.pointerId);
     };
 
     const toggleZoom = (e) => {
-      // We don't use stopPropagation here so it's clean
+      e.stopPropagation();
       if (!zoomed) {
         // ZOOM IN
         const rect = container.getBoundingClientRect();
@@ -1816,33 +1762,56 @@ function initImageZoom() {
         const x = ((clientX - rect.left) / rect.width) * 100;
         const y = ((clientY - rect.top) / rect.height) * 100;
 
+        // Set the zoom centre and reset any translation
         img.style.transformOrigin = `${x}% ${y}%`;
         totalTranslateX = 0;
         totalTranslateY = 0;
         img.style.transform = 'scale(2) translate(0px, 0px)';
 
-        container.classList.add('zoomed');
-        container.style.touchAction = 'none';
+        btn.innerHTML = '✕';
+        btn.classList.add('zoomed');
+        container.style.cursor = 'zoom-out';
+        container.style.touchAction = 'none';   // allow dragging
+
+        // Add drag listeners
+        container.addEventListener('pointerdown', handlePointerDown);
+        container.addEventListener('pointermove', handlePointerMove);
+        container.addEventListener('pointerup', handlePointerUp);
+        container.addEventListener('pointercancel', handlePointerUp);
+
         zoomed = true;
       } else {
         // ZOOM OUT
         img.style.transform = 'scale(1) translate(0px, 0px)';
         img.style.transformOrigin = 'center';
 
-        container.classList.remove('zoomed');
-        container.style.touchAction = '';
+        btn.innerHTML = '🔍';
+        btn.classList.remove('zoomed');
+        container.style.cursor = 'zoom-in';
+        container.style.touchAction = '';       // restore normal scroll
+
+        // Remove drag listeners
+        container.removeEventListener('pointerdown', handlePointerDown);
+        container.removeEventListener('pointermove', handlePointerMove);
+        container.removeEventListener('pointerup', handlePointerUp);
+        container.removeEventListener('pointercancel', handlePointerUp);
+
         zoomed = false;
       }
     };
 
-    // Add permanent listeners (always active)
-    container.addEventListener('pointerdown', handlePointerDown);
-    container.addEventListener('pointermove', handlePointerMove);
-    container.addEventListener('pointerup', handlePointerUp);
-    container.addEventListener('pointercancel', handlePointerCancel);
+    btn.addEventListener('click', toggleZoom);
+
+    // (Optional) Click outside the button to close zoom
+    container.addEventListener('click', (e) => {
+      if (zoomed && e.target !== btn && !btn.contains(e.target)) {
+        toggleZoom(e);
+      }
+    });
   });
 }
 
+// Run on load
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initImageZoom);
 } else {
