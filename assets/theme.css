@@ -3909,8 +3909,8 @@ html.in-app-browser .search-modal {
 
 @media (max-width: 749px) {
   .contact__channels {
-    text-align: center;
-    margin: 0 auto;
+    grid-template-columns: 1fr;
+    
   }
 }
 
