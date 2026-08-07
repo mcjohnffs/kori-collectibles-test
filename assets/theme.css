@@ -3846,6 +3846,8 @@ html.in-app-browser .search-modal {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .contact-form__row {
