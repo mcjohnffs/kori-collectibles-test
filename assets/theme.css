@@ -3748,6 +3748,8 @@ html.in-app-browser .search-modal {
 
 .contact {
   padding: 2rem 0 3.5rem;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .contact__hero {
