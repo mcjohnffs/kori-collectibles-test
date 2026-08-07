@@ -23,7 +23,7 @@
           "type": "stat",
           "settings": {
             "label": "Condition first",
-            "text": "Checked under lamp"
+            "text": "Fair grading"
           }
         },
         "s3": {
@@ -45,7 +45,7 @@
         "heading_line_2": "Honest",
         "heading_em": "condition",
         "heading_after": ".",
-        "text": "Singles and sealed from Switzerland — inspected, priced for collectors, with live inventory counts.",
+        "text": "high quality scans of every card, priced for collectors",
         "primary_label": "Shop singles",
         "primary_link": "/collections/kori-pokemon-singles",
         "secondary_label": "",
@@ -190,7 +190,7 @@
           "type": "item",
           "settings": {
             "number": "03",
-            "heading": "Fast UK dispatch",
+            "heading": "Fast Swiss dispatch",
             "text": "Orders before cut-off leave the same week."
           }
         },
@@ -225,10 +225,11 @@
     },
     "sealed_showcase": {
       "type": "product-showcase",
+      "disabled": true,
       "settings": {
-        "heading": "New from the case",
-        "subheading": "ETBs, boxes, and collections — still sealed, live stock.",
-        "collection": "kori-pokemon-sealed",
+        "heading": "",
+        "subheading": "",
+        "collection": "",
         "product_filter": "sealed",
         "fill_two_rows": true,
         "products_to_show": 14,
