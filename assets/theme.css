@@ -4178,36 +4178,3 @@ html.in-app-browser .search-modal {
 }
 
 
-.image-zoom-container {
-    position: relative;
-    overflow: hidden;
-  }
-.zoom-toggle-icon {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 36px;
-    height: 36px;
-    background: rgba(255,255,255,0.8);
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    font-size: 18px;
-    transition: background 0.2s;
-  }
-.zoom-toggle-icon:hover {
-    background: rgba(255,255,255,1);
-  }
-.zoom-toggle-icon.zoomed {
-    background: rgba(0,0,0,0.6);
-    color: white;
-  }
-.image-zoom-container img.zoomed-image {
-    transition: transform 0.2s ease;
-  }
