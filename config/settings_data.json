@@ -23,15 +23,15 @@
     "color_button_text": "#0c0e14",
     "logo_text": "Kori Collectibles",
     "menu": "main-menu",
-    "footer_brand_name": "Kori Collectibles",
+    "footer_brand_name": "Isaku",
     "footer_about": "Independent TCG shop for singles, sealed product, and collectors who care about condition.",
     "footer_disclaimer": "Not affiliated with or endorsed by any card publisher.",
     "page_width": 1360,
     "show_stock_count": true,
-    "social_instagram": "https://www.instagram.com/kori.collectibles/",
-    "social_discord": "https://discord.gg/8CJVeuAdEv",
-    "social_tiktok": "https://www.tiktok.com/@kori.collectibles",
-    "social_trustpilot": "https://www.trustpilot.com/review/koricollectibles.co.uk",
+    "social_instagram": "*",
+    "social_discord": "*",
+    "social_tiktok": "*",
+    "social_trustpilot": "*",
     "loyalty_enable": true,
     "loyalty_show_launcher": true,
     "loyalty_program_name": "Kori Collectors Club",
@@ -45,13 +45,6 @@
     "loyalty_redeem_proxy_url": "/apps/kori-loyalty/redeem",
     "empty_cart_message": "Your cart is empty - the binder awaits.",
     "cart_free_shipping_threshold": "40",
-    "content_for_index": [],
-    "blocks": {
-      "13768625480086291342": {
-        "type": "shopify://apps/forms/blocks/forms/8744a304-fcb1-4347-b211-bb6b4759a76a",
-        "disabled": false,
-        "settings": {}
-      }
-    }
+    "content_for_index": []
   }
 }
