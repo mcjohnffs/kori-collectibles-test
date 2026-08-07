@@ -1729,6 +1729,41 @@ const styles = `
   }
 `;
 
+// Styles
+const styles = `
+  .image-zoom-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .zoom-toggle-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    font-size: 18px;
+    transition: background 0.2s;
+    touch-action: manipulation;
+  }
+  .zoom-toggle-icon:hover {
+    background: rgba(255,255,255,1);
+  }
+  .zoom-toggle-icon.zoomed {
+    background: rgba(0,0,0,0.7);
+    color: white;
+  }
+`;
+
 const styleSheet = document.createElement("style");
 styleSheet.textContent = styles;
 document.head.appendChild(styleSheet);
@@ -1736,7 +1771,7 @@ document.head.appendChild(styleSheet);
 function initImageZoom() {
   const DRAG_SENSITIVITY = 0.6; // <-- Tune this value (0.4–0.8 usually feels good)
 
-  document.querySelectorAll('.product__media img').forEach(img => {
+  document.querySelectorAll('.card__media img, .product__media img').forEach(img => {
     const container = img.parentElement;
     container.classList.add('image-zoom-container');
 
