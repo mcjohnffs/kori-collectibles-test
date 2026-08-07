@@ -1655,37 +1655,90 @@
 })();
 
 
-// ---- Alternative: tap-to-zoom with drag panning (mobile-optimized) ----
-document.querySelectorAll('.card__media img, .product__media img').forEach(img => {
-  const container = img.parentElement;
-  container.style.overflow = 'hidden';
-  container.style.cursor = 'zoom-in';
+const styleSheet = document.createElement("style");
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
 
-  let zoomed = false;
+// Main logic
+function initImageZoom() {
+  document.querySelectorAll('.card__media img, .product__media img').forEach(img => {
+    const container = img.parentElement;
 
-  container.addEventListener('click', (e) => {
-    if (!zoomed) {
+    // Add class for styling
+    container.classList.add('image-zoom-container');
+
+    // Create toggle button with a magnifying glass icon (SVG)
+    const btn = document.createElement('button');
+    btn.classList.add('zoom-toggle-icon');
+    btn.innerHTML = `🔍`; // or use an SVG for better control
+    btn.setAttribute('aria-label', 'Zoom image');
+    container.appendChild(btn);
+
+    let zoomed = false;
+
+    // Pan handler (only attached when zoomed)
+    const handlePan = (e) => {
+      if (!zoomed) return;
+      e.preventDefault();
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
-      img.style.transformOrigin = x + '% ' + y + '%';
-      img.style.transform = 'scale(2)';
-      container.style.cursor = 'zoom-out';
-      zoomed = true;
-    } else {
-      img.style.transform = 'scale(1)';
-      img.style.transformOrigin = 'center';
-      container.style.cursor = 'zoom-in';
-      zoomed = false;
-    }
-  });
+      img.style.transformOrigin = `${x}% ${y}%`;
+    };
 
-  // Allow panning while zoomed (optional)
-  container.addEventListener('pointermove', (e) => {
-    if (!zoomed) return;
-    const rect = container.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    img.style.transformOrigin = x + '% ' + y + '%';
+    // Toggle zoom
+    const toggleZoom = (e) => {
+      e.stopPropagation();
+      if (!zoomed) {
+        // Zoom in
+        const rect = container.getBoundingClientRect();
+        // Use click coordinates if available (from button tap), else center
+        const clientX = e.clientX || rect.left + rect.width/2;
+        const clientY = e.clientY || rect.top + rect.height/2;
+        const x = ((clientX - rect.left) / rect.width) * 100;
+        const y = ((clientY - rect.top) / rect.height) * 100;
+
+        img.style.transformOrigin = `${x}% ${y}%`;
+        img.style.transform = 'scale(2)';
+        img.classList.add('zoomed-image');
+        btn.innerHTML = '✕'; // change to close icon
+        btn.classList.add('zoomed');
+        container.style.cursor = 'zoom-out';
+
+        // Attach panning listener
+        container.addEventListener('pointermove', handlePan, { passive: false });
+        // Prevent click-outside-zoom from triggering zoom out until explicit action
+        zoomed = true;
+      } else {
+        // Zoom out
+        img.style.transform = 'scale(1)';
+        img.style.transformOrigin = 'center';
+        img.classList.remove('zoomed-image');
+        btn.innerHTML = '🔍';
+        btn.classList.remove('zoomed');
+        container.style.cursor = 'zoom-in';
+
+        // Remove pan listener
+        container.removeEventListener('pointermove', handlePan);
+        zoomed = false;
+      }
+    };
+
+    btn.addEventListener('click', toggleZoom);
+    btn.addEventListener('touchend', (e) => e.preventDefault()); // avoid double-firing on mobile
+
+    // Optional: allow closing by clicking outside (on the container itself, not the button)
+    container.addEventListener('click', (e) => {
+      if (zoomed && e.target !== btn && !btn.contains(e.target)) {
+        toggleZoom(e);
+      }
+    });
   });
-});
+}
+
+// Run on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initImageZoom);
+} else {
+  initImageZoom();
+}
