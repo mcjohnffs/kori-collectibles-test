@@ -3779,11 +3779,8 @@ html.in-app-browser .search-modal {
 }
 
 .contact__channels {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin-bottom: 2.5rem;
-  margin: 0 auto;
 }
 
 .contact__channel {
