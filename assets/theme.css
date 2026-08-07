@@ -3755,6 +3755,7 @@ html.in-app-browser .search-modal {
 .contact__hero {
   max-width: 40rem;
   margin-bottom: 2rem;
+  margin: 0 auto
 }
 
 .contact__eyebrow {
