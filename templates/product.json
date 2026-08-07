@@ -1,9 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "promo_cards_JccRRx": {
+      "type": "promo-cards",
+      "blocks": {
+        "promo_KyCYfG": {
+          "type": "promo",
+          "settings": {
+            "title": "Singles",
+            "text": "Condition-checked cards ready to ship.",
+            "cta": "Browse singles",
+            "link": ""
+          }
+        },
+        "promo_wBreVW": {
+          "type": "promo",
+          "settings": {
+            "title": "Sealed",
+            "text": "ETBs, boxes, and collections.",
+            "cta": "Browse sealed",
+            "link": ""
+          }
+        },
+        "promo_cReJtx": {
+          "type": "promo",
+          "settings": {
+            "title": "Accessories",
+            "text": "Sleeves, binders, and toploaders.",
+            "cta": "Shop accessories",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "promo_KyCYfG",
+        "promo_wBreVW",
+        "promo_cReJtx"
+      ],
+      "name": "Promo cards",
+      "settings": {
+        "heading": "Shop the vault",
+        "subheading": "Sealed drops, graded cards, and everyday accessories."
+      }
+    },
     "main": {
       "type": "main-product",
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "promo_cards_JccRRx",
+    "main"
+  ]
 }

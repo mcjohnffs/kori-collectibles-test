@@ -75,7 +75,7 @@
       },
       "8350846261180586927": {
         "type": "shopify://apps/image-zoom/blocks/app-embed/019a4977-037e-7f5c-9744-b1948ba73ead",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "enable_on_product_images": true,
           "custom_class": "",
