@@ -34,7 +34,7 @@
     "social_trustpilot": "*",
     "loyalty_enable": true,
     "loyalty_show_launcher": true,
-    "loyalty_program_name": "Isaku Coins",
+    "loyalty_program_name": "Isaku's Coin's",
     "loyalty_page": "rewards",
     "loyalty_points_metafield": "custom.loyalty_points",
     "loyalty_redeem_code_metafield": "custom.loyalty_redeem_code",
