@@ -81,7 +81,7 @@
           "custom_class": "",
           "zoom_level": 2,
           "lens_size": 150,
-          "lens_shape": "square",
+          "lens_shape": "circle",
           "lens_border_color": "#000000",
           "lens_border_width": 2,
           "smooth_move": true,
