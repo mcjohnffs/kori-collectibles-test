@@ -2600,7 +2600,7 @@ html.in-app-browser .search-modal {
   padding: 0.55rem;
 }
 
-.product__media-item img {
+.product__media img {
   touch-action: pinch-zoom;
 }
 
